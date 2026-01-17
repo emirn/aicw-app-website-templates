@@ -95,7 +95,7 @@
   "blog": {
     "sectionTitle": "LATEST",
     "postsPerPage": 9,
-    "showCategories": true,
+    "showCategories": false,
     "showDate": true,
     "showAuthor": true,
     "showExcerpt": true,
@@ -109,7 +109,7 @@
     "showSocialShare": true,
     "socialShareButtons": ["facebook", "linkedin", "twitter", "copy"],
     "showAuthorBio": false,
-    "showTags": true
+    "showTags": false
   },
   "seo": {
     "titleSeparator": " | ",

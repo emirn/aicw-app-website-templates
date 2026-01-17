@@ -4,14 +4,6 @@
     <div class="container container-narrow">
       {{!-- Article Header --}}
       <header class="article-header">
-        {{#if article.categories.length}}
-        <div class="article-meta-top">
-          {{#each article.categories}}
-          <a href="/category/{{slugify this}}/" class="category-badge">{{this}}</a>
-          {{/each}}
-        </div>
-        {{/if}}
-
         <h1 class="article-title">{{article.title}}</h1>
 
         {{#if article.excerpt}}
@@ -60,17 +52,6 @@
       <div class="article-content prose">
         {{{article.contentHtml}}}
       </div>
-
-      {{!-- Tags --}}
-      {{#if config.article.showTags}}
-      {{#if article.tags.length}}
-      <div class="article-tags">
-        {{#each article.tags}}
-        <a href="/tag/{{slugify this}}/" class="tag">{{this}}</a>
-        {{/each}}
-      </div>
-      {{/if}}
-      {{/if}}
 
       {{!-- Social Share --}}
       {{#if config.article.showSocialShare}}
