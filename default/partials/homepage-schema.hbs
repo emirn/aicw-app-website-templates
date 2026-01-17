@@ -1,0 +1,20 @@
+{{#if config.seo.enableJsonLd}}
+{{> website-schema}}
+{{> organization-schema}}
+{{#if articles.length}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "{{config.site.name}}",
+  "description": "{{config.site.description}}",
+  "url": "{{canonicalUrl}}",
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": {{articles.length}},
+    "itemListElement": [{{#each articles}}{"@type": "ListItem", "position": {{add @index 1}}, "url": "{{../config.site.url}}/{{slug}}/", "name": "{{title}}"}{{#unless @last}},{{/unless}}{{/each}}]
+  }
+}
+</script>
+{{/if}}
+{{/if}}
