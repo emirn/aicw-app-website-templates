@@ -1,3 +1,5 @@
+{{!-- Skip template-generated schema if article content has embedded JSON-LD from blogpostgen --}}
+{{#unless article.hasEmbeddedJsonLd}}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -39,3 +41,4 @@
   {{/if}}
 }
 </script>
+{{/unless}}
