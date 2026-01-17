@@ -1,0 +1,41 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{article.title}}",
+  "description": "{{#if article.og_description}}{{article.og_description}}{{else}}{{article.excerpt}}{{/if}}",
+  {{#if article.image_social}}
+  "image": "{{article.image_social}}",
+  {{else if article.featured_image_url}}
+  "image": "{{article.featured_image_url}}",
+  {{/if}}
+  "datePublished": "{{article.published_at}}",
+  {{#if article.updated_at}}
+  "dateModified": "{{article.updated_at}}",
+  {{/if}}
+  {{#if article.author_name}}
+  "author": {
+    "@type": "Person",
+    "name": "{{article.author_name}}"
+  },
+  {{/if}}
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{config.site.name}}",
+    {{#if config.logo.imageUrl}}
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{config.logo.imageUrl}}"
+    },
+    {{/if}}
+    "url": "{{config.site.url}}"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{canonicalUrl}}"
+  }
+  {{#if article.keywords}}
+  ,"keywords": "{{article.keywords}}"
+  {{/if}}
+}
+</script>

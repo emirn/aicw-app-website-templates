@@ -1,0 +1,103 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+{{!-- Page Title --}}
+<title>{{#if pageTitle}}{{pageTitle}}{{config.seo.titleSeparator}}{{/if}}{{config.site.name}}</title>
+
+{{!-- SEO Meta Tags --}}
+<meta name="description" content="{{#if pageDescription}}{{pageDescription}}{{else}}{{config.site.description}}{{/if}}">
+{{#if keywords}}<meta name="keywords" content="{{keywords}}">{{/if}}
+
+{{!-- Favicon --}}
+{{#if config.site.faviconUrl}}
+<link rel="icon" href="{{config.site.faviconUrl}}">
+{{/if}}
+
+{{!-- Open Graph / Facebook --}}
+<meta property="og:type" content="{{#if article}}article{{else}}website{{/if}}">
+<meta property="og:url" content="{{canonicalUrl}}">
+<meta property="og:site_name" content="{{config.site.name}}">
+{{#if article}}
+<meta property="og:title" content="{{#if article.og_title}}{{article.og_title}}{{else}}{{article.title}}{{/if}}">
+<meta property="og:description" content="{{#if article.og_description}}{{article.og_description}}{{else}}{{article.excerpt}}{{/if}}">
+{{#if article.image_social}}
+<meta property="og:image" content="{{article.image_social}}">
+{{else if article.featured_image_url}}
+<meta property="og:image" content="{{article.featured_image_url}}">
+{{else if config.seo.defaultOgImage}}
+<meta property="og:image" content="{{config.seo.defaultOgImage}}">
+{{/if}}
+{{else}}
+<meta property="og:title" content="{{config.site.name}}">
+<meta property="og:description" content="{{config.site.description}}">
+{{#if config.seo.defaultOgImage}}
+<meta property="og:image" content="{{config.seo.defaultOgImage}}">
+{{/if}}
+{{/if}}
+
+{{!-- Twitter Card --}}
+<meta name="twitter:card" content="summary_large_image">
+{{#if config.seo.twitterHandle}}
+<meta name="twitter:site" content="@{{config.seo.twitterHandle}}">
+{{/if}}
+{{#if article}}
+<meta name="twitter:title" content="{{#if article.twitter_title}}{{article.twitter_title}}{{else}}{{article.title}}{{/if}}">
+<meta name="twitter:description" content="{{#if article.twitter_description}}{{article.twitter_description}}{{else}}{{article.excerpt}}{{/if}}">
+{{#if article.image_social}}
+<meta name="twitter:image" content="{{article.image_social}}">
+{{else if article.featured_image_url}}
+<meta name="twitter:image" content="{{article.featured_image_url}}">
+{{else if config.seo.defaultOgImage}}
+<meta name="twitter:image" content="{{config.seo.defaultOgImage}}">
+{{/if}}
+{{else}}
+<meta name="twitter:title" content="{{config.site.name}}">
+<meta name="twitter:description" content="{{config.site.description}}">
+{{#if config.seo.defaultOgImage}}
+<meta name="twitter:image" content="{{config.seo.defaultOgImage}}">
+{{/if}}
+{{/if}}
+
+{{!-- Canonical URL --}}
+<link rel="canonical" href="{{canonicalUrl}}">
+
+{{!-- RSS Feed --}}
+<link rel="alternate" type="application/rss+xml" title="{{config.site.name}} RSS Feed" href="/rss.xml">
+
+{{!-- Google Fonts --}}
+{{#if config.typography.googleFonts.length}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family={{#each config.typography.googleFonts}}{{this}}{{#unless @last}}&family={{/unless}}{{/each}}&display=swap" rel="stylesheet">
+{{/if}}
+
+{{!-- Stylesheets --}}
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/prose.css">
+
+{{!-- Dark Mode FOUC Prevention --}}
+<script>
+(function() {
+  var stored = localStorage.getItem('theme');
+  var defaultTheme = '{{config.darkMode.default}}';
+  var theme;
+  if (stored) {
+    theme = stored;
+  } else if (defaultTheme === 'system') {
+    theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  } else {
+    theme = defaultTheme;
+  }
+  document.documentElement.setAttribute('data-theme', theme);
+})();
+</script>
+
+{{!-- AICW Tracking Widget --}}
+{{#if config.tracking.widgetCode}}
+{{{config.tracking.widgetCode}}}
+{{/if}}
+
+{{!-- Custom Head Code --}}
+{{#if config.tracking.customHeadCode}}
+{{{config.tracking.customHeadCode}}}
+{{/if}}

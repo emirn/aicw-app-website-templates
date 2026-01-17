@@ -1,0 +1,68 @@
+<header class="site-header">
+  <div class="container">
+    <nav class="nav {{config.header.style}}">
+      {{!-- Logo --}}
+      <a href="/" class="logo">
+        {{#if (eq config.logo.type "image")}}
+          {{#if config.logo.imageUrl}}
+          <img src="{{config.logo.imageUrl}}" alt="{{config.site.name}}" class="logo-image">
+          {{else}}
+          <span class="logo-text {{#if config.logo.showBorder}}logo-bordered{{/if}}">{{config.logo.text}}</span>
+          {{/if}}
+        {{else}}
+          <span class="logo-text {{#if config.logo.showBorder}}logo-bordered{{/if}}">{{config.logo.text}}</span>
+        {{/if}}
+      </a>
+
+      {{!-- Navigation Links --}}
+      <div class="nav-links">
+        {{#each config.header.navLinks}}
+        <a href="{{url}}" class="nav-link" {{#if external}}target="_blank" rel="noopener noreferrer"{{/if}}>
+          {{label}}
+        </a>
+        {{/each}}
+      </div>
+
+      {{!-- Right side: Search + CTA --}}
+      <div class="nav-actions">
+        {{#if config.header.showSearch}}
+        <button class="search-btn" aria-label="Search">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        {{/if}}
+
+        {{#if config.header.ctaButton.enabled}}
+        <a href="{{config.header.ctaButton.url}}" class="cta-btn cta-{{config.header.ctaButton.style}}">
+          {{config.header.ctaButton.label}}
+        </a>
+        {{/if}}
+
+        {{!-- Mobile menu toggle --}}
+        <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    {{!-- Mobile Navigation --}}
+    <div class="mobile-nav" aria-hidden="true">
+      {{#each config.header.navLinks}}
+      <a href="{{url}}" class="mobile-nav-link" {{#if external}}target="_blank" rel="noopener noreferrer"{{/if}}>
+        {{label}}
+      </a>
+      {{/each}}
+      {{#if config.header.ctaButton.enabled}}
+      <a href="{{config.header.ctaButton.url}}" class="mobile-cta-btn">
+        {{config.header.ctaButton.label}}
+      </a>
+      {{/if}}
+    </div>
+  </div>
+</header>

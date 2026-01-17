@@ -1,0 +1,86 @@
+{{!-- Single article page --}}
+{{#> base}}
+  <article class="article-page">
+    <div class="container container-narrow">
+      {{!-- Article Header --}}
+      <header class="article-header">
+        {{#if article.categories.length}}
+        <div class="article-meta-top">
+          {{#each article.categories}}
+          <a href="/category/{{slugify this}}/" class="category-badge">{{this}}</a>
+          {{/each}}
+        </div>
+        {{/if}}
+
+        <h1 class="article-title">{{article.title}}</h1>
+
+        {{#if article.excerpt}}
+        <p class="article-excerpt">{{article.excerpt}}</p>
+        {{/if}}
+
+        <div class="article-meta">
+          {{#if config.blog.showAuthor}}
+          {{#if article.author_name}}
+          <div class="author-info">
+            {{#if article.author_avatar_url}}
+            <img src="{{article.author_avatar_url}}" alt="{{article.author_name}}" class="author-avatar">
+            {{/if}}
+            <span class="author-name">{{article.author_name}}</span>
+          </div>
+          {{/if}}
+          {{/if}}
+
+          {{#if config.blog.showDate}}
+          {{#if article.published_at}}
+          <span class="publish-date">{{formatDate article.published_at config.blog.dateFormat}}</span>
+          {{/if}}
+          {{/if}}
+
+          {{#if config.blog.showReadingTime}}
+          {{#if article.reading_time}}
+          <span class="reading-time">{{article.reading_time}} min read</span>
+          {{/if}}
+          {{/if}}
+        </div>
+      </header>
+
+      {{!-- Featured Image --}}
+      {{#if article.featured_image_url}}
+      <figure class="featured-image">
+        <img src="{{article.featured_image_url}}" alt="{{article.title}}" loading="lazy">
+      </figure>
+      {{/if}}
+
+      {{!-- Table of Contents --}}
+      {{#if config.blog.showTableOfContents}}
+      {{> table-of-contents}}
+      {{/if}}
+
+      {{!-- Article Content --}}
+      <div class="article-content prose">
+        {{{article.contentHtml}}}
+      </div>
+
+      {{!-- Tags --}}
+      {{#if config.article.showTags}}
+      {{#if article.tags.length}}
+      <div class="article-tags">
+        {{#each article.tags}}
+        <a href="/tag/{{slugify this}}/" class="tag">{{this}}</a>
+        {{/each}}
+      </div>
+      {{/if}}
+      {{/if}}
+
+      {{!-- Social Share --}}
+      {{#if config.article.showSocialShare}}
+      {{> social-share}}
+      {{/if}}
+
+      {{!-- JSON-LD Structured Data --}}
+      {{#if config.seo.enableJsonLd}}
+      {{> article-schema}}
+      {{/if}}
+    </div>
+  </article>
+{{/base}}

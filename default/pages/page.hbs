@@ -1,0 +1,26 @@
+{{!-- Paginated article listing (page 2+) --}}
+{{#> base}}
+  {{#if config.hero.showOnAllPages}}
+  {{> hero}}
+  {{/if}}
+
+  <section class="articles-section">
+    <div class="container">
+      {{#if config.blog.sectionTitle}}
+      <h2 class="section-title">{{config.blog.sectionTitle}}</h2>
+      {{/if}}
+
+      {{#if articles.length}}
+      <div class="article-grid">
+        {{#each articles}}
+        {{> article-card}}
+        {{/each}}
+      </div>
+
+      {{> pagination}}
+      {{else}}
+      <p class="no-articles">No articles on this page.</p>
+      {{/if}}
+    </div>
+  </section>
+{{/base}}
