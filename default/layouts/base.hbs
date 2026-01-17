@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="{{config.site.language}}">
+<head>
+  {{> head}}
+</head>
+<body>
+  {{> navigation}}
+
+  <main>
+    {{{body}}}
+  </main>
+
+  {{> footer}}
+
+  {{#if config.tracking.customBodyCode}}
+  {{{config.tracking.customBodyCode}}}
+  {{/if}}
+</body>
+</html>

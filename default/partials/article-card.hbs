@@ -1,0 +1,49 @@
+<article class="article-card">
+  {{#if featured_image_url}}
+  <a href="/{{slug}}/" class="article-card-image">
+    <img src="{{featured_image_url}}" alt="{{title}}" loading="lazy">
+  </a>
+  {{/if}}
+
+  <div class="article-card-content">
+    {{!-- Category and Date --}}
+    <div class="article-card-meta">
+      {{#if ../config.blog.showCategories}}
+      {{#if categories.length}}
+      <a href="/category/{{slugify (first categories)}}/" class="article-card-category">{{first categories}}</a>
+      <span class="meta-separator">·</span>
+      {{/if}}
+      {{/if}}
+
+      {{#if ../config.blog.showDate}}
+      {{#if published_at}}
+      <time datetime="{{published_at}}" class="article-card-date">{{formatDate published_at ../config.blog.dateFormat}}</time>
+      {{/if}}
+      {{/if}}
+    </div>
+
+    {{!-- Title --}}
+    <h3 class="article-card-title">
+      <a href="/{{slug}}/">{{title}}</a>
+    </h3>
+
+    {{!-- Excerpt --}}
+    {{#if ../config.blog.showExcerpt}}
+    {{#if excerpt}}
+    <p class="article-card-excerpt">{{truncate excerpt 120}}</p>
+    {{/if}}
+    {{/if}}
+
+    {{!-- Author --}}
+    {{#if ../config.blog.showAuthor}}
+    {{#if author_name}}
+    <div class="article-card-author">
+      {{#if author_avatar_url}}
+      <img src="{{author_avatar_url}}" alt="{{author_name}}" class="author-avatar-small">
+      {{/if}}
+      <span class="author-name">{{author_name}}</span>
+    </div>
+    {{/if}}
+    {{/if}}
+  </div>
+</article>

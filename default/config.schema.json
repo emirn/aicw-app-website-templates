@@ -1,0 +1,206 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AICW Website Template Configuration",
+  "description": "Configuration schema for the default website template",
+  "type": "object",
+  "properties": {
+    "site": {
+      "type": "object",
+      "description": "Basic site information",
+      "properties": {
+        "name": { "type": "string", "description": "Site name" },
+        "tagline": { "type": "string", "description": "Short tagline" },
+        "description": { "type": "string", "description": "SEO description" },
+        "url": { "type": "string", "format": "uri", "description": "Site URL" },
+        "language": { "type": "string", "default": "en" },
+        "faviconUrl": { "type": "string", "description": "Favicon URL" }
+      },
+      "required": ["name"]
+    },
+    "logo": {
+      "type": "object",
+      "description": "Logo configuration",
+      "properties": {
+        "type": { "type": "string", "enum": ["text", "image"], "default": "text" },
+        "text": { "type": "string", "description": "Text to display as logo" },
+        "imageUrl": { "type": "string", "description": "URL to logo image" },
+        "showBorder": { "type": "boolean", "default": true },
+        "borderColor": { "type": "string", "default": "#3B82F6" }
+      }
+    },
+    "hero": {
+      "type": "object",
+      "description": "Hero section configuration",
+      "properties": {
+        "enabled": { "type": "boolean", "default": true },
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "showOnAllPages": { "type": "boolean", "default": false }
+      }
+    },
+    "colors": {
+      "type": "object",
+      "description": "Light mode color scheme",
+      "properties": {
+        "primary": { "type": "string", "format": "color" },
+        "primaryHover": { "type": "string", "format": "color" },
+        "accent": { "type": "string", "format": "color" },
+        "textPrimary": { "type": "string", "format": "color" },
+        "textSecondary": { "type": "string", "format": "color" },
+        "textMuted": { "type": "string", "format": "color" },
+        "background": { "type": "string", "format": "color" },
+        "backgroundSecondary": { "type": "string", "format": "color" },
+        "border": { "type": "string", "format": "color" }
+      }
+    },
+    "darkMode": {
+      "type": "object",
+      "description": "Dark mode configuration",
+      "properties": {
+        "enabled": { "type": "boolean", "default": true },
+        "default": { "type": "string", "enum": ["dark", "light", "system"], "default": "dark" },
+        "togglePosition": { "type": "string", "enum": ["header", "footer"], "default": "footer" },
+        "colors": {
+          "type": "object",
+          "properties": {
+            "textPrimary": { "type": "string", "format": "color" },
+            "textSecondary": { "type": "string", "format": "color" },
+            "textMuted": { "type": "string", "format": "color" },
+            "background": { "type": "string", "format": "color" },
+            "backgroundSecondary": { "type": "string", "format": "color" },
+            "border": { "type": "string", "format": "color" }
+          }
+        }
+      }
+    },
+    "typography": {
+      "type": "object",
+      "description": "Typography settings",
+      "properties": {
+        "fontFamily": { "type": "string" },
+        "headingFontFamily": { "type": "string" },
+        "googleFonts": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "header": {
+      "type": "object",
+      "description": "Header configuration",
+      "properties": {
+        "style": { "type": "string", "enum": ["pill", "classic", "minimal"], "default": "pill" },
+        "showSearch": { "type": "boolean", "default": true },
+        "navLinks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": { "type": "string" },
+              "url": { "type": "string" },
+              "external": { "type": "boolean", "default": false }
+            },
+            "required": ["label", "url"]
+          }
+        },
+        "ctaButton": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean", "default": true },
+            "label": { "type": "string" },
+            "url": { "type": "string" },
+            "style": { "type": "string", "enum": ["primary", "secondary", "outline"], "default": "primary" }
+          }
+        }
+      }
+    },
+    "footer": {
+      "type": "object",
+      "description": "Footer configuration",
+      "properties": {
+        "showLogo": { "type": "boolean", "default": true },
+        "showTagline": { "type": "boolean", "default": true },
+        "columns": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": { "type": "string" },
+              "links": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "label": { "type": "string" },
+                    "url": { "type": "string" },
+                    "external": { "type": "boolean", "default": false }
+                  },
+                  "required": ["label", "url"]
+                }
+              }
+            },
+            "required": ["title", "links"]
+          }
+        },
+        "socialLinks": {
+          "type": "object",
+          "properties": {
+            "twitter": { "type": "string" },
+            "linkedin": { "type": "string" },
+            "facebook": { "type": "string" },
+            "rss": { "type": "boolean", "default": true }
+          }
+        },
+        "copyrightText": { "type": "string" },
+        "poweredByText": { "type": "string" },
+        "showPoweredBy": { "type": "boolean", "default": true }
+      }
+    },
+    "blog": {
+      "type": "object",
+      "description": "Blog listing configuration",
+      "properties": {
+        "sectionTitle": { "type": "string", "default": "LATEST" },
+        "postsPerPage": { "type": "integer", "minimum": 1, "maximum": 50, "default": 9 },
+        "showCategories": { "type": "boolean", "default": true },
+        "showDate": { "type": "boolean", "default": true },
+        "showAuthor": { "type": "boolean", "default": true },
+        "showExcerpt": { "type": "boolean", "default": true },
+        "showReadingTime": { "type": "boolean", "default": false },
+        "showTableOfContents": { "type": "boolean", "default": true },
+        "showRelatedPosts": { "type": "boolean", "default": true },
+        "paginationStyle": { "type": "string", "enum": ["pages", "loadMore", "infinite"], "default": "pages" },
+        "dateFormat": { "type": "string", "default": "MMM d, yyyy" }
+      }
+    },
+    "article": {
+      "type": "object",
+      "description": "Single article page configuration",
+      "properties": {
+        "showSocialShare": { "type": "boolean", "default": true },
+        "socialShareButtons": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["facebook", "linkedin", "twitter", "copy", "email"] }
+        },
+        "showAuthorBio": { "type": "boolean", "default": false },
+        "showTags": { "type": "boolean", "default": true }
+      }
+    },
+    "seo": {
+      "type": "object",
+      "description": "SEO configuration",
+      "properties": {
+        "titleSeparator": { "type": "string", "default": " | " },
+        "defaultOgImage": { "type": "string" },
+        "twitterHandle": { "type": "string" },
+        "enableJsonLd": { "type": "boolean", "default": true }
+      }
+    },
+    "tracking": {
+      "type": "object",
+      "description": "Tracking and analytics",
+      "properties": {
+        "widgetCode": { "type": "string", "description": "AICW tracking widget HTML snippet" },
+        "customHeadCode": { "type": "string", "description": "Custom code for <head>" },
+        "customBodyCode": { "type": "string", "description": "Custom code before </body>" }
+      }
+    }
+  }
+}
